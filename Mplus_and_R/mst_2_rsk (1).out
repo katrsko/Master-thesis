@@ -1,0 +1,2463 @@
+Mplus VERSION 8.9
+MUTHEN & MUTHEN
+05/22/2023  12:26 AM
+
+INPUT INSTRUCTIONS
+
+  TITLE:
+      Exploratory analysis of MST effectiveness during COVID-19
+      Outcome var chgrsk
+
+  DATA:
+      file = "MST.dat";
+      ngroups = 3;
+
+  VARIABLE:
+      names =
+          ! Var # 1--8                            ! Admin var
+          agecoh ageter mid north age compstat compbin trmtleng
+          ! Var # 9--12                           ! Demographic
+          immi1 immi2 female country
+          ! Var # 13--19                          ! Treament var
+          travel travbin tamr prior insti foster psyc
+          ! Var # 20--25                          ! Admission (T0)
+          innhome innvio innsch innlaw inndrug bhv0
+          ! Var # 26--34
+          innyls1 innyls2 innyls3 innyls4 innyls5
+          innyls6 innyls7 innyls8 rsk0
+          ! Var # 35--40                          ! Discharge (T1)
+          outhome outvio outsch outlaw outdrug bhv1
+          ! Var # 41--49
+          outyls1 outyls2 outyls3 outyls4 outyls5
+          outyls6 outyls7 outyls8 rsk1
+          ! Var # 50--55                          ! Follow-ups
+          home6 vio6 sch6 law6 drug6 bhv6         ! 6-month (T2)
+          ! Var # 56--61
+          home12 vio12 sch12 law12 drug12 bhv12   ! 12-month (T3)
+          ! Var # 62--67
+          home18 vio18 sch18 law18 drug18 bhv18   ! 18-month (T4)
+          ! Var # 68--74
+          t0 t1 t2 t3 t4 chgbhv chgrsk            ! Derived var
+          ;
+
+      usevar =
+          chgrsk
+          mid north age female immi1 immi2
+          tamr prior insti foster psyc
+          ;
+
+      missing = all (-999);
+
+      grouping = agecoh (1 = before 2 = during 3 = after);
+
+  ANALYSIS:
+      estimator = mlr;
+
+  DATA IMPUTATION:
+      impute =
+          chgrsk
+          mid north age female immi1 immi2
+          tamr prior insti foster psyc
+          ;
+      ndatasets = 10;
+      save = mst_2_rsk_*.dat;
+
+  MODEL:
+      chgrsk on
+          mid north age female immi1 immi2
+          tamr prior insti foster psyc
+          ;
+
+  OUTPUT:
+      stdyx;
+
+
+
+INPUT READING TERMINATED NORMALLY
+
+
+
+
+Exploratory analysis of MST effectiveness during COVID-19
+Outcome var chgrsk
+
+SUMMARY OF ANALYSIS
+
+Number of groups                                                 3
+Average number of observations
+   Group BEFORE                                                569
+   Group DURING                                                620
+   Group AFTER                                                 832
+   Total sample size                                          2021
+
+Number of replications
+    Requested                                                   10
+    Completed                                                   10
+
+Number of dependent variables                                    1
+Number of independent variables                                 11
+Number of continuous latent variables                            0
+
+Observed dependent variables
+
+  Continuous
+   CHGRSK
+
+Observed independent variables
+   MID         NORTH       AGE         FEMALE      IMMI1       IMMI2
+   TAMR        PRIOR       INSTI       FOSTER      PSYC
+
+Variables with special functions
+
+  Grouping variable     AGECOH
+
+Variables used for imputation
+
+  Variables imputed as continuous
+   CHGRSK      MID         NORTH       AGE         FEMALE      IMMI1
+   IMMI2       TAMR        PRIOR       INSTI       FOSTER      PSYC
+
+
+Estimator                                                      MLR
+Information matrix                                        OBSERVED
+Maximum number of iterations                                  1000
+Convergence criterion                                    0.500D-04
+Maximum number of steepest descent iterations                   20
+Maximum number of iterations for H1                           2000
+Convergence criterion for H1                             0.100D-03
+Specifications for Bayesian Estimation
+  Point estimate                                            MEDIAN
+  Number of Markov chain Monte Carlo (MCMC) chains               2
+  Random seed for the first chain                                0
+  Starting value information                           UNPERTURBED
+  Algorithm used for Markov chain Monte Carlo           GIBBS(PX1)
+  Convergence criterion                                  0.500D-01
+  Maximum number of iterations                               50000
+  K-th iteration used for thinning                               1
+Specifications for Data Imputation
+  Number of imputed data sets                                   10
+  H1 imputation model type                              COVARIANCE
+  Iteration intervals for thinning                             100
+
+Input data file(s)
+  MST.dat
+
+Input data format  FREE
+
+
+SUMMARY OF DATA FOR THE FIRST DATA SET
+
+   Group BEFORE
+     Number of missing data patterns             1
+
+   Group DURING
+     Number of missing data patterns             1
+
+   Group AFTER
+     Number of missing data patterns             1
+
+
+SUMMARY OF MISSING DATA PATTERNS FOR THE FIRST DATA SET
+
+
+     MISSING DATA PATTERNS FOR BEFORE (x = not missing)
+
+           1
+ CHGRSK    x
+ MID       x
+ NORTH     x
+ AGE       x
+ FEMALE    x
+ IMMI1     x
+ IMMI2     x
+ TAMR      x
+ PRIOR     x
+ INSTI     x
+ FOSTER    x
+ PSYC      x
+
+
+     MISSING DATA PATTERN FREQUENCIES FOR BEFORE
+
+    Pattern   Frequency
+          1         569
+
+
+     MISSING DATA PATTERNS FOR DURING (x = not missing)
+
+           1
+ CHGRSK    x
+ MID       x
+ NORTH     x
+ AGE       x
+ FEMALE    x
+ IMMI1     x
+ IMMI2     x
+ TAMR      x
+ PRIOR     x
+ INSTI     x
+ FOSTER    x
+ PSYC      x
+
+
+     MISSING DATA PATTERN FREQUENCIES FOR DURING
+
+    Pattern   Frequency
+          1         620
+
+
+     MISSING DATA PATTERNS FOR AFTER (x = not missing)
+
+           1
+ CHGRSK    x
+ MID       x
+ NORTH     x
+ AGE       x
+ FEMALE    x
+ IMMI1     x
+ IMMI2     x
+ TAMR      x
+ PRIOR     x
+ INSTI     x
+ FOSTER    x
+ PSYC      x
+
+
+     MISSING DATA PATTERN FREQUENCIES FOR AFTER
+
+    Pattern   Frequency
+          1         832
+
+
+COVARIANCE COVERAGE OF DATA FOR THE FIRST DATA SET
+
+Minimum covariance coverage value   0.100
+
+
+     PROPORTION OF DATA PRESENT FOR BEFORE
+
+
+           Covariance Coverage
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID            1.000         1.000
+ NORTH          1.000         1.000         1.000
+ AGE            1.000         1.000         1.000         1.000
+ FEMALE         1.000         1.000         1.000         1.000         1.000
+ IMMI1          1.000         1.000         1.000         1.000         1.000
+ IMMI2          1.000         1.000         1.000         1.000         1.000
+ TAMR           1.000         1.000         1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2          1.000         1.000
+ TAMR           1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           1.000         1.000
+
+
+     PROPORTION OF DATA PRESENT FOR DURING
+
+
+           Covariance Coverage
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID            1.000         1.000
+ NORTH          1.000         1.000         1.000
+ AGE            1.000         1.000         1.000         1.000
+ FEMALE         1.000         1.000         1.000         1.000         1.000
+ IMMI1          1.000         1.000         1.000         1.000         1.000
+ IMMI2          1.000         1.000         1.000         1.000         1.000
+ TAMR           1.000         1.000         1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2          1.000         1.000
+ TAMR           1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           1.000         1.000
+
+
+     PROPORTION OF DATA PRESENT FOR AFTER
+
+
+           Covariance Coverage
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID            1.000         1.000
+ NORTH          1.000         1.000         1.000
+ AGE            1.000         1.000         1.000         1.000
+ FEMALE         1.000         1.000         1.000         1.000         1.000
+ IMMI1          1.000         1.000         1.000         1.000         1.000
+ IMMI2          1.000         1.000         1.000         1.000         1.000
+ TAMR           1.000         1.000         1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2          1.000         1.000
+ TAMR           1.000         1.000         1.000
+ PRIOR          1.000         1.000         1.000         1.000
+ INSTI          1.000         1.000         1.000         1.000         1.000
+ FOSTER         1.000         1.000         1.000         1.000         1.000
+ PSYC           1.000         1.000         1.000         1.000         1.000
+
+
+           Covariance Coverage
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           1.000         1.000
+
+
+SAMPLE STATISTICS
+
+NOTE:  These are average results over 10 data sets.
+
+
+     ESTIMATED SAMPLE STATISTICS FOR BEFORE
+
+
+           Means
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.741         0.195         0.097        12.845         0.329
+
+
+           Means
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.070         0.104         0.781         0.193         0.100
+
+
+           Means
+              FOSTER        PSYC
+              ________      ________
+                0.062         0.638
+
+
+           Covariances
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        30.217
+ MID           -0.073         0.157
+ NORTH         -0.031        -0.019         0.087
+ AGE           -0.313        -0.019        -0.020         0.943
+ FEMALE        -0.112        -0.025        -0.004         0.065         0.221
+ IMMI1         -0.108        -0.007         0.000         0.007        -0.009
+ IMMI2         -0.031        -0.008         0.004        -0.019         0.001
+ TAMR           0.228         0.017         0.000        -0.009        -0.006
+ PRIOR          0.013         0.015        -0.008        -0.023        -0.020
+ INSTI         -0.073        -0.002        -0.006         0.015         0.007
+ FOSTER        -0.028        -0.001        -0.001         0.010        -0.001
+ PSYC          -0.123        -0.019        -0.005        -0.017         0.022
+
+
+           Covariances
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.065
+ IMMI2         -0.007         0.093
+ TAMR          -0.003        -0.002         0.050
+ PRIOR         -0.007         0.001         0.001         0.156
+ INSTI          0.004         0.005        -0.003        -0.004         0.090
+ FOSTER        -0.001        -0.001         0.000        -0.001         0.004
+ PSYC          -0.013        -0.017        -0.006         0.019         0.017
+
+
+           Covariances
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.058
+ PSYC           0.012         0.231
+
+
+           Correlations
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID           -0.034         1.000
+ NORTH         -0.019        -0.161         1.000
+ AGE           -0.059        -0.049        -0.070         1.000
+ FEMALE        -0.043        -0.137        -0.026         0.142         1.000
+ IMMI1         -0.077        -0.066         0.003         0.030        -0.075
+ IMMI2         -0.019        -0.066         0.045        -0.065         0.007
+ TAMR           0.186         0.187         0.003        -0.042        -0.057
+ PRIOR          0.006         0.096        -0.070        -0.060        -0.106
+ INSTI         -0.044        -0.017        -0.070         0.053         0.053
+ FOSTER        -0.021        -0.015        -0.009         0.041        -0.008
+ PSYC          -0.047        -0.100        -0.038        -0.037         0.099
+
+
+           Correlations
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2         -0.094         1.000
+ TAMR          -0.045        -0.032         1.000
+ PRIOR         -0.065         0.009         0.013         1.000
+ INSTI          0.046         0.059        -0.048        -0.030         1.000
+ FOSTER        -0.013        -0.015        -0.002        -0.014         0.061
+ PSYC          -0.108        -0.116        -0.052         0.100         0.117
+
+
+           Correlations
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           0.102         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR DURING
+
+
+           Means
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.542         0.165         0.087        14.234         0.408
+
+
+           Means
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.110         0.085         0.766         0.184         0.142
+
+
+           Means
+              FOSTER        PSYC
+              ________      ________
+                0.084         0.653
+
+
+           Covariances
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        31.544
+ MID           -0.131         0.137
+ NORTH         -0.110        -0.014         0.080
+ AGE           -0.065        -0.021         0.002         0.773
+ FEMALE        -0.074        -0.007         0.000         0.024         0.242
+ IMMI1          0.046        -0.008        -0.005         0.023         0.004
+ IMMI2         -0.065        -0.001         0.004         0.014        -0.004
+ TAMR           0.136         0.013         0.005        -0.005        -0.007
+ PRIOR         -0.019         0.007        -0.001         0.015        -0.009
+ INSTI         -0.180        -0.001        -0.003         0.010         0.002
+ FOSTER        -0.123         0.007         0.001        -0.003         0.006
+ PSYC          -0.185         0.001        -0.004        -0.033         0.043
+
+
+           Covariances
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.098
+ IMMI2         -0.009         0.078
+ TAMR          -0.013        -0.002         0.047
+ PRIOR         -0.006        -0.009         0.009         0.150
+ INSTI          0.009         0.002        -0.009         0.008         0.122
+ FOSTER        -0.001        -0.002         0.000        -0.003         0.009
+ PSYC          -0.031        -0.024        -0.007         0.027         0.007
+
+
+           Covariances
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.077
+ PSYC           0.008         0.227
+
+
+           Correlations
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID           -0.063         1.000
+ NORTH         -0.069        -0.137         1.000
+ AGE           -0.013        -0.064         0.009         1.000
+ FEMALE        -0.027        -0.041         0.000         0.055         1.000
+ IMMI1          0.026        -0.072        -0.053         0.083         0.024
+ IMMI2         -0.041        -0.011         0.049         0.056        -0.031
+ TAMR           0.111         0.162         0.084        -0.027        -0.067
+ PRIOR         -0.009         0.048        -0.014         0.044        -0.047
+ INSTI         -0.092        -0.006        -0.027         0.034         0.010
+ FOSTER        -0.079         0.070         0.010        -0.014         0.045
+ PSYC          -0.069         0.003        -0.027        -0.080         0.184
+
+
+           Correlations
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2         -0.107         1.000
+ TAMR          -0.192        -0.034         1.000
+ PRIOR         -0.047        -0.086         0.111         1.000
+ INSTI          0.079         0.024        -0.114         0.057         1.000
+ FOSTER        -0.013        -0.030        -0.002        -0.023         0.094
+ PSYC          -0.211        -0.177        -0.065         0.145         0.044
+
+
+           Correlations
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           0.062         1.000
+
+
+     ESTIMATED SAMPLE STATISTICS FOR AFTER
+
+
+           Means
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.906         0.138         0.073        15.419         0.361
+
+
+           Means
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.132         0.084         0.747         0.209         0.200
+
+
+           Means
+              FOSTER        PSYC
+              ________      ________
+                0.097         0.633
+
+
+           Covariances
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        37.512
+ MID           -0.080         0.119
+ NORTH         -0.084        -0.010         0.068
+ AGE           -0.629        -0.020        -0.040         2.299
+ FEMALE        -0.145        -0.004         0.002         0.010         0.231
+ IMMI1         -0.134        -0.005        -0.007         0.049        -0.012
+ IMMI2         -0.046        -0.003         0.001        -0.008         0.002
+ TAMR           0.297         0.012         0.000        -0.008         0.004
+ PRIOR         -0.126         0.012        -0.001        -0.019        -0.014
+ INSTI         -0.200         0.000        -0.006         0.067        -0.007
+ FOSTER        -0.100         0.000         0.001        -0.002         0.005
+ PSYC          -0.194         0.003        -0.009        -0.021         0.023
+
+
+           Covariances
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.115
+ IMMI2         -0.011         0.077
+ TAMR          -0.004        -0.002         0.058
+ PRIOR         -0.004        -0.008         0.004         0.165
+ INSTI          0.005         0.004        -0.002         0.016         0.160
+ FOSTER         0.003        -0.001        -0.004        -0.001         0.003
+ PSYC          -0.024        -0.010         0.001         0.014         0.013
+
+
+           Covariances
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.088
+ PSYC           0.013         0.232
+
+
+           Correlations
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000
+ MID           -0.038         1.000
+ NORTH         -0.053        -0.113         1.000
+ AGE           -0.068        -0.037        -0.102         1.000
+ FEMALE        -0.049        -0.025         0.019         0.013         1.000
+ IMMI1         -0.065        -0.043        -0.083         0.096        -0.071
+ IMMI2         -0.027        -0.034         0.014        -0.018         0.016
+ TAMR           0.202         0.148        -0.001        -0.022         0.031
+ PRIOR         -0.050         0.085        -0.009        -0.031        -0.072
+ INSTI         -0.082         0.000        -0.060         0.110        -0.037
+ FOSTER        -0.055        -0.002         0.017        -0.005         0.032
+ PSYC          -0.066         0.016        -0.073        -0.028         0.099
+
+
+           Correlations
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          1.000
+ IMMI2         -0.118         1.000
+ TAMR          -0.051        -0.035         1.000
+ PRIOR         -0.026        -0.071         0.043         1.000
+ INSTI          0.036         0.033        -0.024         0.098         1.000
+ FOSTER         0.027        -0.012        -0.059        -0.009         0.029
+ PSYC          -0.145        -0.075         0.010         0.072         0.068
+
+
+           Correlations
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         1.000
+ PSYC           0.090         1.000
+
+
+UNIVARIATE SAMPLE STATISTICS
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS FOR BEFORE
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     CHGRSK                9.732      -0.196      -6.000    0.53%       5.000      9.000     10.000
+             567.000      30.150      -0.119      24.000    0.35%      11.000     14.000
+     MID                   0.195       1.539       0.000   80.49%       0.000      0.000      0.000
+             569.000       0.157       0.368       1.000   19.51%       0.000      0.000
+     NORTH                 0.097       2.730       0.000   90.33%       0.000      0.000      0.000
+             569.000       0.087       5.452       1.000    9.67%       0.000      0.000
+     AGE                  12.845       0.440       9.000    0.18%      12.000     13.000     13.000
+             569.000       0.943       5.216      18.000    0.70%      13.000     14.000
+     FEMALE                0.329       0.730       0.000   67.14%       0.000      0.000      0.000
+             569.000       0.221      -1.468       1.000   32.86%       0.000      1.000
+     IMMI1                 0.070       3.362       0.000   92.97%       0.000      0.000      0.000
+             569.000       0.065       9.301       1.000    7.03%       0.000      0.000
+     IMMI2                 0.104       2.600       0.000   89.63%       0.000      0.000      0.000
+             569.000       0.093       4.760       1.000   10.37%       0.000      0.000
+     TAMR                  0.783      -1.440       0.000    0.64%       0.640      0.810      0.860
+             469.000       0.049       1.620       1.000    6.40%       0.900      0.960
+     PRIOR                 0.193       1.553       0.000   80.67%       0.000      0.000      0.000
+             569.000       0.156       0.412       1.000   19.33%       0.000      0.000
+     INSTI                 0.100       2.663       0.000   89.98%       0.000      0.000      0.000
+             569.000       0.090       5.094       1.000   10.02%       0.000      0.000
+     FOSTER                0.062       3.650       0.000   93.85%       0.000      0.000      0.000
+             569.000       0.058      11.323       1.000    6.15%       0.000      0.000
+     PSYC                  0.638      -0.574       0.000   36.20%       0.000      1.000      1.000
+             569.000       0.231      -1.670       1.000   63.80%       1.000      1.000
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS FOR DURING
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     CHGRSK                9.532      -0.040      -4.000    0.33%       4.000      9.000     10.000
+             607.000      31.541      -0.285      29.000    0.16%      11.000     14.000
+     MID                   0.165       1.810       0.000   83.55%       0.000      0.000      0.000
+             620.000       0.137       1.275       1.000   16.45%       0.000      0.000
+     NORTH                 0.087       2.929       0.000   91.29%       0.000      0.000      0.000
+             620.000       0.080       6.577       1.000    8.71%       0.000      0.000
+     AGE                  14.234      -2.852       8.000    0.16%      14.000     14.000     14.000
+             620.000       0.773      12.109      15.000   36.45%      14.000     15.000
+     FEMALE                0.408       0.374       0.000   59.19%       0.000      0.000      0.000
+             620.000       0.242      -1.860       1.000   40.81%       1.000      1.000
+     IMMI1                 0.110       2.498       0.000   89.03%       0.000      0.000      0.000
+             620.000       0.098       4.241       1.000   10.97%       0.000      0.000
+     IMMI2                 0.085       2.965       0.000   91.45%       0.000      0.000      0.000
+             620.000       0.078       6.792       1.000    8.55%       0.000      0.000
+     TAMR                  0.772      -1.437       0.000    0.21%       0.630      0.810      0.850
+             483.000       0.048       1.598       1.000    4.97%       0.880      0.950
+     PRIOR                 0.184       1.632       0.000   81.61%       0.000      0.000      0.000
+             620.000       0.150       0.664       1.000   18.39%       0.000      0.000
+     INSTI                 0.142       2.052       0.000   85.81%       0.000      0.000      0.000
+             620.000       0.122       2.211       1.000   14.19%       0.000      0.000
+     FOSTER                0.084       3.002       0.000   91.61%       0.000      0.000      0.000
+             620.000       0.077       7.015       1.000    8.39%       0.000      0.000
+     PSYC                  0.653      -0.644       0.000   34.68%       0.000      1.000      1.000
+             620.000       0.227      -1.585       1.000   65.32%       1.000      1.000
+
+
+     UNIVARIATE HIGHER-ORDER MOMENT DESCRIPTIVE STATISTICS FOR AFTER
+
+         Variable/         Mean/     Skewness/   Minimum/ % with                Percentiles
+        Sample Size      Variance    Kurtosis    Maximum  Min/Max      20%/60%    40%/80%    Median
+
+     CHGRSK                9.900      -0.049     -14.000    0.12%       5.000      9.000     10.000
+             822.000      37.379       0.052      27.000    0.49%      11.000     15.000
+     MID                   0.138       2.096       0.000   86.18%       0.000      0.000      0.000
+             832.000       0.119       2.395       1.000   13.82%       0.000      0.000
+     NORTH                 0.073       3.274       0.000   92.67%       0.000      0.000      0.000
+             832.000       0.068       8.718       1.000    7.33%       0.000      0.000
+     AGE                  15.419      -2.247       7.000    0.12%      15.000     15.000     16.000
+             832.000       2.299       5.869      17.000   17.55%      16.000     16.000
+     FEMALE                0.361       0.581       0.000   63.94%       0.000      0.000      0.000
+             832.000       0.231      -1.663       1.000   36.06%       0.000      1.000
+     IMMI1                 0.132       2.172       0.000   86.78%       0.000      0.000      0.000
+             832.000       0.115       2.716       1.000   13.22%       0.000      0.000
+     IMMI2                 0.084       2.996       0.000   91.59%       0.000      0.000      0.000
+             832.000       0.077       6.978       1.000    8.41%       0.000      0.000
+     TAMR                  0.749      -1.234       0.000    0.83%       0.550      0.770      0.830
+             605.000       0.058       0.850       1.000    5.79%       0.880      0.950
+     PRIOR                 0.209       1.430       0.000   79.09%       0.000      0.000      0.000
+             832.000       0.165       0.046       1.000   20.91%       0.000      1.000
+     INSTI                 0.200       1.504       0.000   80.05%       0.000      0.000      0.000
+             832.000       0.160       0.261       1.000   19.95%       0.000      0.000
+     FOSTER                0.097       2.717       0.000   90.26%       0.000      0.000      0.000
+             832.000       0.088       5.379       1.000    9.74%       0.000      0.000
+     PSYC                  0.633      -0.554       0.000   36.66%       0.000      1.000      1.000
+             832.000       0.232      -1.693       1.000   63.34%       1.000      1.000
+
+
+MODEL FIT INFORMATION
+
+Number of Free Parameters                       39
+
+Loglikelihood
+
+    H0 Value
+
+        Mean                             -6351.015
+        Std Dev                              6.914
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        -6367.100      -6365.874
+           0.980       0.900        -6365.215      -6365.874
+           0.950       0.900        -6362.389      -6365.874
+           0.900       0.900        -6359.877      -6365.874
+           0.800       0.800        -6356.834      -6365.874
+           0.700       0.700        -6354.641      -6355.887
+           0.500       0.500        -6351.015      -6351.842
+           0.300       0.400        -6347.389      -6345.959
+           0.200       0.200        -6345.196      -6345.929
+           0.100       0.100        -6342.154      -6343.968
+           0.050       0.000        -6339.642      -6343.968
+           0.020       0.000        -6336.815      -6343.968
+           0.010       0.000        -6334.930      -6343.968
+
+    H1 Value
+
+        Mean                             -6351.015
+        Std Dev                              6.914
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        -6367.100      -6365.873
+           0.980       0.900        -6365.215      -6365.873
+           0.950       0.900        -6362.389      -6365.873
+           0.900       0.900        -6359.877      -6365.873
+           0.800       0.800        -6356.834      -6365.873
+           0.700       0.700        -6354.641      -6355.887
+           0.500       0.500        -6351.015      -6351.842
+           0.300       0.400        -6347.389      -6345.959
+           0.200       0.200        -6345.196      -6345.929
+           0.100       0.100        -6342.154      -6343.968
+           0.050       0.000        -6339.642      -6343.968
+           0.020       0.000        -6336.815      -6343.968
+           0.010       0.000        -6334.930      -6343.968
+
+Information Criteria
+
+    Akaike (AIC)
+
+        Mean                             12780.030
+        Std Dev                             13.829
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        12747.860      12762.103
+           0.980       1.000        12751.630      12762.103
+           0.950       1.000        12757.283      12762.103
+           0.900       0.900        12762.307      12762.103
+           0.800       0.800        12768.392      12762.103
+           0.700       0.600        12772.779      12769.857
+           0.500       0.500        12780.030      12775.265
+           0.300       0.300        12787.282      12782.727
+           0.200       0.200        12791.669      12789.775
+           0.100       0.100        12797.754      12793.292
+           0.050       0.100        12802.778      12793.292
+           0.020       0.100        12808.431      12793.292
+           0.010       0.000        12812.201      12793.292
+
+    Bayesian (BIC)
+
+        Mean                             12998.873
+        Std Dev                             13.829
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        12966.703      12980.946
+           0.980       1.000        12970.473      12980.946
+           0.950       1.000        12976.126      12980.946
+           0.900       0.900        12981.150      12980.946
+           0.800       0.800        12987.235      12980.946
+           0.700       0.600        12991.621      12988.700
+           0.500       0.500        12998.873      12994.108
+           0.300       0.300        13006.125      13001.569
+           0.200       0.200        13010.511      13008.617
+           0.100       0.100        13016.596      13012.134
+           0.050       0.100        13021.620      13012.134
+           0.020       0.100        13027.273      13012.134
+           0.010       0.000        13031.043      13012.134
+
+    Sample-Size Adjusted BIC (n* = (n + 2) / 24)
+
+        Mean                             12874.968
+        Std Dev                             13.829
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000        12842.797      12857.040
+           0.980       1.000        12846.567      12857.040
+           0.950       1.000        12852.220      12857.040
+           0.900       0.900        12857.244      12857.040
+           0.800       0.800        12863.329      12857.040
+           0.700       0.600        12867.716      12864.794
+           0.500       0.500        12874.968      12870.202
+           0.300       0.300        12882.219      12877.664
+           0.200       0.200        12886.606      12884.712
+           0.100       0.100        12892.691      12888.229
+           0.050       0.100        12897.715      12888.229
+           0.020       0.100        12903.368      12888.229
+           0.010       0.000        12907.138      12888.229
+
+Chi-Square Test of Model Fit
+
+        Degrees of freedom                       0
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       10
+
+             Proportions                   Percentiles
+        Expected    Observed         Expected       Observed
+           0.990       1.000            0.000          0.000
+           0.980       1.000            0.000          0.000
+           0.950       1.000            0.000          0.000
+           0.900       1.000            0.000          0.000
+           0.800       1.000            0.000          0.000
+           0.700       1.000            0.000          0.000
+           0.500       1.000            0.000          0.000
+           0.300       1.000            0.000          0.000
+           0.200       1.000            0.000          0.000
+           0.100       1.000            0.000          0.000
+           0.050       1.000            0.000          0.000
+           0.020       1.000            0.000          0.000
+           0.010       1.000            0.000          0.000
+
+RMSEA (Root Mean Square Error Of Approximation)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       10
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+CFI/TLI
+
+    CFI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       10
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+    TLI
+
+        Mean                                 1.000
+        Std Dev                              0.000
+        Number of successful computations       10
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       0.000
+           0.980       0.000
+           0.950       0.000
+           0.900       0.000
+           0.800       0.000
+           0.700       0.000
+           0.500       0.000
+           0.300       0.000
+           0.200       0.000
+           0.100       0.000
+           0.050       0.000
+           0.020       0.000
+           0.010       0.000
+
+SRMR (Standardized Root Mean Square Residual)
+
+        Mean                                 0.000
+        Std Dev                              0.000
+        Number of successful computations       10
+
+        Cumulative Distribution Function
+           Value    Function Value
+           0.990       1.000
+           0.980       1.000
+           0.950       1.000
+           0.900       1.000
+           0.800       1.000
+           0.700       1.000
+           0.500       1.000
+           0.300       1.000
+           0.200       1.000
+           0.100       1.000
+           0.050       1.000
+           0.020       1.000
+           0.010       1.000
+
+
+MODEL RESULTS
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Group BEFORE
+
+ CHGRSK   ON
+    MID               -1.361      0.500     -2.723      0.006      0.022
+    NORTH             -0.780      0.698     -1.119      0.263      0.019
+    AGE               -0.298      0.231     -1.291      0.197      0.008
+    FEMALE            -0.457      0.511     -0.894      0.371      0.015
+    IMMI1             -1.816      1.152     -1.576      0.115      0.009
+    IMMI2             -0.600      0.795     -0.755      0.450      0.008
+    TAMR               4.717      1.131      4.172      0.000      0.106
+    PRIOR              0.033      0.557      0.060      0.952      0.021
+    INSTI             -0.387      0.984     -0.393      0.694      0.007
+    FOSTER            -0.354      0.870     -0.407      0.684      0.005
+    PSYC              -0.633      0.483     -1.309      0.191      0.026
+
+ Intercepts
+    CHGRSK            11.031      3.252      3.392      0.001      0.023
+
+ Residual Variances
+    CHGRSK            28.538      1.694     16.843      0.000      0.015
+
+Group DURING
+
+ CHGRSK   ON
+    MID               -1.377      0.525     -2.625      0.009      0.042
+    NORTH             -1.821      0.763     -2.387      0.017      0.035
+    AGE               -0.106      0.224     -0.474      0.635      0.003
+    FEMALE            -0.114      0.465     -0.245      0.807      0.021
+    IMMI1              0.517      0.761      0.680      0.497      0.016
+    IMMI2             -0.809      0.907     -0.891      0.373      0.032
+    TAMR               3.245      1.242      2.613      0.009      0.185
+    PRIOR             -0.157      0.564     -0.278      0.781      0.027
+    INSTI             -1.161      0.631     -1.841      0.066      0.020
+    FOSTER            -1.261      0.770     -1.638      0.101      0.006
+    PSYC              -0.652      0.510     -1.277      0.201      0.034
+
+ Intercepts
+    CHGRSK             9.735      3.342      2.913      0.004      0.021
+
+ Residual Variances
+    CHGRSK            30.130      1.653     18.231      0.000      0.036
+
+Group AFTER
+
+ CHGRSK   ON
+    MID               -1.437      0.535     -2.685      0.007      0.047
+    NORTH             -1.928      0.762     -2.530      0.011      0.092
+    AGE               -0.258      0.127     -2.033      0.042      0.107
+    FEMALE            -0.742      0.444     -1.672      0.095      0.040
+    IMMI1             -1.363      0.632     -2.156      0.031      0.017
+    IMMI2             -0.834      0.735     -1.134      0.257      0.036
+    TAMR               5.349      0.975      5.488      0.000      0.231
+    PRIOR             -0.798      0.510     -1.565      0.118      0.036
+    INSTI             -0.947      0.576     -1.645      0.100      0.024
+    FOSTER            -0.638      0.683     -0.934      0.350      0.019
+    PSYC              -0.912      0.441     -2.069      0.039      0.026
+
+ Intercepts
+    CHGRSK            11.747      2.054      5.720      0.000      0.107
+
+ Residual Variances
+    CHGRSK            34.605      1.813     19.085      0.000      0.072
+
+
+QUALITY OF NUMERICAL RESULTS
+
+     Average Condition Number for the Information Matrix      0.163E-03
+       (ratio of smallest to largest eigenvalue)
+
+
+STANDARDIZED MODEL RESULTS
+
+
+STDYX Standardization
+
+                                                    Two-Tailed   Rate of
+                    Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+Group BEFORE
+
+ CHGRSK   ON
+    MID               -0.098      0.036     -2.722      0.006      0.024
+    NORTH             -0.042      0.038     -1.118      0.264      0.019
+    AGE               -0.053      0.041     -1.289      0.198      0.008
+    FEMALE            -0.039      0.044     -0.895      0.371      0.014
+    IMMI1             -0.084      0.054     -1.562      0.118      0.009
+    IMMI2             -0.033      0.044     -0.754      0.451      0.008
+    TAMR               0.191      0.045      4.242      0.000      0.097
+    PRIOR              0.002      0.040      0.060      0.952      0.021
+    INSTI             -0.021      0.054     -0.394      0.694      0.007
+    FOSTER            -0.015      0.038     -0.407      0.684      0.005
+    PSYC              -0.055      0.042     -1.307      0.191      0.026
+
+ Intercepts
+    CHGRSK             2.007      0.597      3.364      0.001      0.025
+
+ Residual Variances
+    CHGRSK             0.944      0.020     46.415      0.000      0.051
+
+Group DURING
+
+ CHGRSK   ON
+    MID               -0.091      0.035     -2.633      0.008      0.041
+    NORTH             -0.091      0.038     -2.378      0.017      0.033
+    AGE               -0.017      0.035     -0.475      0.635      0.003
+    FEMALE            -0.010      0.041     -0.245      0.807      0.021
+    IMMI1              0.029      0.042      0.680      0.496      0.017
+    IMMI2             -0.040      0.045     -0.891      0.373      0.032
+    TAMR               0.126      0.048      2.614      0.009      0.188
+    PRIOR             -0.011      0.039     -0.278      0.781      0.027
+    INSTI             -0.072      0.039     -1.835      0.066      0.021
+    FOSTER            -0.062      0.038     -1.637      0.102      0.006
+    PSYC              -0.055      0.043     -1.277      0.202      0.034
+
+ Intercepts
+    CHGRSK             1.733      0.595      2.916      0.004      0.021
+
+ Residual Variances
+    CHGRSK             0.955      0.017     56.073      0.000      0.084
+
+Group AFTER
+
+ CHGRSK   ON
+    MID               -0.081      0.030     -2.696      0.007      0.047
+    NORTH             -0.082      0.033     -2.517      0.012      0.086
+    AGE               -0.064      0.032     -2.028      0.043      0.108
+    FEMALE            -0.058      0.035     -1.677      0.093      0.040
+    IMMI1             -0.075      0.035     -2.154      0.031      0.018
+    IMMI2             -0.038      0.033     -1.131      0.258      0.036
+    TAMR               0.210      0.039      5.415      0.000      0.280
+    PRIOR             -0.053      0.034     -1.564      0.118      0.037
+    INSTI             -0.062      0.038     -1.643      0.100      0.022
+    FOSTER            -0.031      0.033     -0.936      0.349      0.020
+    PSYC              -0.072      0.035     -2.072      0.038      0.028
+
+ Intercepts
+    CHGRSK             1.918      0.338      5.675      0.000      0.110
+
+ Residual Variances
+    CHGRSK             0.922      0.020     45.626      0.000      0.199
+
+
+R-SQUARE
+
+Group BEFORE
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    CHGRSK             0.056      0.020      2.733      0.006      0.051
+
+Group DURING
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    CHGRSK             0.045      0.017      2.634      0.008      0.084
+
+Group AFTER
+
+    Observed                                        Two-Tailed   Rate of
+    Variable        Estimate       S.E.  Est./S.E.    P-Value    Missing
+
+    CHGRSK             0.078      0.020      3.835      0.000      0.199
+
+
+TECHNICAL 1 OUTPUT
+
+
+     PARAMETER SPECIFICATION FOR BEFORE
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK             0             0
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                  1             0             0             0             0
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0             2             3             4             5
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK             6             7             8             9            10
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK            11            12
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK            13
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+     PARAMETER SPECIFICATION FOR DURING
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK             0             0
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                 14             0             0             0             0
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0            15            16            17            18
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK            19            20            21            22            23
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK            24            25
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK            26
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+     PARAMETER SPECIFICATION FOR AFTER
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK             0             0             0             0             0
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK             0             0
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                 27             0             0             0             0
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                  0             0             0             0             0
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                  0             0
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK             0            28            29            30            31
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK            32            33            34            35            36
+ MID                0             0             0             0             0
+ NORTH              0             0             0             0             0
+ AGE                0             0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK            37            38
+ MID                0             0
+ NORTH              0             0
+ AGE                0             0
+ FEMALE             0             0
+ IMMI1              0             0
+ IMMI2              0             0
+ TAMR               0             0
+ PRIOR              0             0
+ INSTI              0             0
+ FOSTER             0             0
+ PSYC               0             0
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK            39
+ MID                0             0
+ NORTH              0             0             0
+ AGE                0             0             0             0
+ FEMALE             0             0             0             0             0
+ IMMI1              0             0             0             0             0
+ IMMI2              0             0             0             0             0
+ TAMR               0             0             0             0             0
+ PRIOR              0             0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1              0
+ IMMI2              0             0
+ TAMR               0             0             0
+ PRIOR              0             0             0             0
+ INSTI              0             0             0             0             0
+ FOSTER             0             0             0             0             0
+ PSYC               0             0             0             0             0
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER             0
+ PSYC               0             0
+
+
+     STARTING VALUES FOR BEFORE
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000         0.000         0.000         0.000         0.000
+ MID            0.000         1.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         1.000         0.000         0.000
+ AGE            0.000         0.000         0.000         1.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         1.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          1.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         1.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         1.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         1.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         1.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         1.000         0.000
+ PSYC           0.000         1.000
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.000
+ PSYC           0.000         0.000
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.732         0.195         0.097        12.845         0.329
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.070         0.104         0.773         0.193         0.100
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                0.062         0.638
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         0.000         0.000
+ PSYC           0.000         0.000
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        15.075
+ MID            0.000         0.157
+ NORTH          0.000        -0.019         0.087
+ AGE            0.000        -0.019        -0.020         0.943
+ FEMALE         0.000        -0.025        -0.004         0.065         0.221
+ IMMI1          0.000        -0.007         0.000         0.007        -0.009
+ IMMI2          0.000        -0.008         0.004        -0.019         0.001
+ TAMR           0.000         0.016         0.000        -0.009        -0.005
+ PRIOR          0.000         0.015        -0.008        -0.023        -0.020
+ INSTI          0.000        -0.002        -0.006         0.015         0.007
+ FOSTER         0.000        -0.001        -0.001         0.010        -0.001
+ PSYC           0.000        -0.019        -0.005        -0.017         0.022
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.065
+ IMMI2         -0.007         0.093
+ TAMR          -0.003        -0.003         0.048
+ PRIOR         -0.007         0.001         0.001         0.156
+ INSTI          0.004         0.005        -0.002        -0.004         0.090
+ FOSTER        -0.001        -0.001         0.000        -0.001         0.004
+ PSYC          -0.013        -0.017        -0.006         0.019         0.017
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.058
+ PSYC           0.012         0.231
+
+
+     STARTING VALUES FOR DURING
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000         0.000         0.000         0.000         0.000
+ MID            0.000         1.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         1.000         0.000         0.000
+ AGE            0.000         0.000         0.000         1.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         1.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          1.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         1.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         1.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         1.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         1.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         1.000         0.000
+ PSYC           0.000         1.000
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.000
+ PSYC           0.000         0.000
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.732         0.165         0.087        14.234         0.408
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.110         0.085         0.762         0.184         0.142
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                0.084         0.653
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         0.000         0.000
+ PSYC           0.000         0.000
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        15.075
+ MID            0.000         0.137
+ NORTH          0.000        -0.014         0.080
+ AGE            0.000        -0.021         0.002         0.773
+ FEMALE         0.000        -0.007         0.000         0.024         0.242
+ IMMI1          0.000        -0.008        -0.005         0.023         0.004
+ IMMI2          0.000        -0.001         0.004         0.014        -0.004
+ TAMR           0.000         0.014         0.002        -0.003        -0.005
+ PRIOR          0.000         0.007        -0.001         0.015        -0.009
+ INSTI          0.000        -0.001        -0.003         0.010         0.002
+ FOSTER         0.000         0.007         0.001        -0.003         0.006
+ PSYC           0.000         0.001        -0.004        -0.033         0.043
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.098
+ IMMI2         -0.009         0.078
+ TAMR          -0.013        -0.002         0.048
+ PRIOR         -0.006        -0.009         0.009         0.150
+ INSTI          0.009         0.002        -0.010         0.008         0.122
+ FOSTER        -0.001        -0.002         0.001        -0.003         0.009
+ PSYC          -0.031        -0.024        -0.007         0.027         0.007
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.077
+ PSYC           0.008         0.227
+
+
+     STARTING VALUES FOR AFTER
+
+
+           NU
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.000         0.000         0.000         0.000         0.000
+
+
+           NU
+              FOSTER        PSYC
+              ________      ________
+                0.000         0.000
+
+
+           LAMBDA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         1.000         0.000         0.000         0.000         0.000
+ MID            0.000         1.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         1.000         0.000         0.000
+ AGE            0.000         0.000         0.000         1.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         1.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          1.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         1.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         1.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         1.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         1.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           LAMBDA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         1.000         0.000
+ PSYC           0.000         1.000
+
+
+           THETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           THETA
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.000
+ PSYC           0.000         0.000
+
+
+           ALPHA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+                9.732         0.138         0.073        15.419         0.361
+
+
+           ALPHA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+                0.132         0.084         0.753         0.209         0.200
+
+
+           ALPHA
+              FOSTER        PSYC
+              ________      ________
+                0.097         0.633
+
+
+           BETA
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ CHGRSK         0.000         0.000         0.000         0.000         0.000
+ MID            0.000         0.000         0.000         0.000         0.000
+ NORTH          0.000         0.000         0.000         0.000         0.000
+ AGE            0.000         0.000         0.000         0.000         0.000
+ FEMALE         0.000         0.000         0.000         0.000         0.000
+ IMMI1          0.000         0.000         0.000         0.000         0.000
+ IMMI2          0.000         0.000         0.000         0.000         0.000
+ TAMR           0.000         0.000         0.000         0.000         0.000
+ PRIOR          0.000         0.000         0.000         0.000         0.000
+ INSTI          0.000         0.000         0.000         0.000         0.000
+ FOSTER         0.000         0.000         0.000         0.000         0.000
+ PSYC           0.000         0.000         0.000         0.000         0.000
+
+
+           BETA
+              FOSTER        PSYC
+              ________      ________
+ CHGRSK         0.000         0.000
+ MID            0.000         0.000
+ NORTH          0.000         0.000
+ AGE            0.000         0.000
+ FEMALE         0.000         0.000
+ IMMI1          0.000         0.000
+ IMMI2          0.000         0.000
+ TAMR           0.000         0.000
+ PRIOR          0.000         0.000
+ INSTI          0.000         0.000
+ FOSTER         0.000         0.000
+ PSYC           0.000         0.000
+
+
+           PSI
+              CHGRSK        MID           NORTH         AGE           FEMALE
+              ________      ________      ________      ________      ________
+ CHGRSK        15.075
+ MID            0.000         0.119
+ NORTH          0.000        -0.010         0.068
+ AGE            0.000        -0.020        -0.040         2.299
+ FEMALE         0.000        -0.004         0.002         0.010         0.231
+ IMMI1          0.000        -0.005        -0.007         0.049        -0.012
+ IMMI2          0.000        -0.003         0.001        -0.008         0.002
+ TAMR           0.000         0.012         0.000        -0.025         0.003
+ PRIOR          0.000         0.012        -0.001        -0.019        -0.014
+ INSTI          0.000         0.000        -0.006         0.067        -0.007
+ FOSTER         0.000         0.000         0.001        -0.002         0.005
+ PSYC           0.000         0.003        -0.009        -0.021         0.023
+
+
+           PSI
+              IMMI1         IMMI2         TAMR          PRIOR         INSTI
+              ________      ________      ________      ________      ________
+ IMMI1          0.115
+ IMMI2         -0.011         0.077
+ TAMR          -0.003        -0.002         0.059
+ PRIOR         -0.004        -0.008         0.005         0.165
+ INSTI          0.005         0.004        -0.002         0.016         0.160
+ FOSTER         0.003        -0.001        -0.003        -0.001         0.003
+ PSYC          -0.024        -0.010        -0.003         0.014         0.013
+
+
+           PSI
+              FOSTER        PSYC
+              ________      ________
+ FOSTER         0.088
+ PSYC           0.013         0.232
+
+
+SAVEDATA INFORMATION
+
+
+  Save file
+    mst_2_rsk_*.dat
+
+  Order of variables
+
+    CHGRSK
+    MID
+    NORTH
+    AGE
+    FEMALE
+    IMMI1
+    IMMI2
+    TAMR
+    PRIOR
+    INSTI
+    FOSTER
+    PSYC
+    AGECOH
+
+  Save file format           Free
+
+  Save file record length    10000
+
+  Save missing symbol        *
+
+
+     Beginning Time:  00:26:39
+        Ending Time:  00:28:00
+       Elapsed Time:  00:01:21
+
+
+
+MUTHEN & MUTHEN
+3463 Stoner Ave.
+Los Angeles, CA  90066
+
+Tel: (310) 391-9971
+Fax: (310) 391-8971
+Web: www.StatModel.com
+Support: Support@StatModel.com
+
+Copyright (c) 1998-2023 Muthen & Muthen
